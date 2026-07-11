@@ -32,8 +32,9 @@ Antworte NUR mit validem JSON in diesem Format, ohne Markdown-Codeblock:
 
 
 def get_transcript_text(video_id: str) -> str:
-    transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=["de", "en"])
-    return " ".join(chunk["text"] for chunk in transcript)
+    ytt_api = YouTubeTranscriptApi()
+    fetched = ytt_api.fetch(video_id, languages=["de", "en"])
+    return " ".join(snippet.text for snippet in fetched)
 
 
 def summarize_video(video_id: str, api_key: str) -> dict:
