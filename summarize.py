@@ -6,7 +6,7 @@ Fakten für ein kurzes Format).
 """
 import os
 import json
-import google.generativeai as genai
+from google import genai
 from youtube_transcript_api import YouTubeTranscriptApi
 from config import GEMINI_MODEL, NUM_IMAGES
 
@@ -37,18 +37,15 @@ def get_transcript_text(video_id: str) -> str:
 
 
 def summarize_video(video_id: str, api_key: str) -> dict:
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(GEMINI_MODEL)
+    client = genai.Client(api_key=api_key)
 
     transcript_text = get_transcript_text(video_id)
-    # Transkript ggf. kürzen, damit der Prompt nicht zu riesig wird
     transcript_text = transcript_text[:15000]
 
     prompt = SYSTEM_PROMPT.format(num_images=NUM_IMAGES) + "\n\nTranskript:\n" + transcript_text
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
 
     raw = response.text.strip()
-    # Falls Gemini trotzdem Codeblock-Markdown zurückgibt, entfernen
     raw = raw.replace("```json", "").replace("```", "").strip()
 
     return json.loads(raw)
