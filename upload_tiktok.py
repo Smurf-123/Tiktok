@@ -15,9 +15,9 @@ import os
 import time
 import requests
 
-TOKEN_URL = "https://open.tiktokapi.com/v2/oauth/token/"
-INIT_URL = "https://open.tiktokapi.com/v2/post/publish/video/init/"
-STATUS_URL = "https://open.tiktokapi.com/v2/post/publish/status/fetch/"
+TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/"
+INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/"
+STATUS_URL = "https://open.tiktokapis.com/v2/post/publish/status/fetch/"
 
 
 def refresh_access_token(client_key: str, client_secret: str, refresh_token: str) -> str:
@@ -37,7 +37,7 @@ def upload_video(video_path: str, title: str, access_token: str, privacy_level: 
     PUBLIC_TO_EVERYONE (erst nach TikTok-App-Review möglich).
     """
     video_size = os.path.getsize(video_path)
-    chunk_size = video_size  # einfacher Fall: in einem Stück hochladen (< 64MB üblich bei Kurzvideos)
+    chunk_size = video_size
 
     init_payload = {
         "post_info": {
