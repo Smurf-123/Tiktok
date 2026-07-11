@@ -9,7 +9,7 @@ Alle Secrets (API-Keys) kommen NICHT hierher, sondern aus Umgebungsvariablen
 # -> Kanal-Seite öffnen -> Seitenquelltext -> nach "channelId" suchen
 # oder https://commentpicker.com/youtube-channel-id.php nutzen.
 SOURCE_CHANNELS = {
-    "dw_documentary": "UCEkjqEIDpXvpTNPKMFypDbQ",  # DW Documentary
+    "dw_documentary": "UCW39zufHfsuGgpLviKh297Q",  # DW Documentary
 }
 
 # Wie viele Sekunden soll das fertige Video ungefähr lang sein
